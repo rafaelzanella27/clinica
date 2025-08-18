@@ -6,9 +6,9 @@ import com.estudos.clinica.entrypoints.http.data.response.UsuarioResponseDTO;
 public interface UsuarioUseCase {
     UsuarioResponseDTO criarUsuario(UsuarioRequestDTO requestDTO);
 
-    UsuarioResponseDTO buscarUsuarioPorId(String login);
+    UsuarioResponseDTO buscarUsuarioPorLogin(String login);
 
-    UsuarioResponseDTO atualizarUsuario(UsuarioRequestDTO requestDTO);
+    UsuarioResponseDTO atualizarUsuario(UsuarioRequestDTO requestDTO) throws Exception;
 
-    void deletarUsuario(String login);
+    void deletarUsuario(String login) throws Exception;
 }

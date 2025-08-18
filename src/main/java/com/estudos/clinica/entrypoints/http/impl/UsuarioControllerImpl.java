@@ -4,18 +4,16 @@ import com.estudos.clinica.entrypoints.http.UsuarioController;
 import com.estudos.clinica.entrypoints.http.data.request.UsuarioRequestDTO;
 import com.estudos.clinica.entrypoints.http.data.response.UsuarioResponseDTO;
 import com.estudos.clinica.usecase.UsuarioUseCase;
-import com.estudos.clinica.usecase.impl.UsuarioUseCaseImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 import static java.util.Objects.isNull;
 
 @RestController
+@RequiredArgsConstructor
 public class UsuarioControllerImpl implements UsuarioController {
 
-    @Autowired
-    private UsuarioUseCase usuarioUseCase;
-
+    private final UsuarioUseCase usuarioUseCase;
 
     @Override
     public UsuarioResponseDTO criarUsuario(final UsuarioRequestDTO usuarioRequest) {
@@ -29,16 +27,25 @@ public class UsuarioControllerImpl implements UsuarioController {
 
     @Override
     public UsuarioResponseDTO buscarUsuarioPorId(final String login) {
-        return null;
+        if (isNull(login)) {
+            return null;
+        }
+        return usuarioUseCase.buscarUsuarioPorLogin(login);
     }
 
     @Override
-    public UsuarioResponseDTO atualizarUsuario(final UsuarioRequestDTO usuarioRequest) {
-        return null;
+    public void atualizarUsuario(final UsuarioRequestDTO usuarioRequest) throws Exception {
+        if (isNull(usuarioRequest)) {
+            return;
+        }
+        usuarioUseCase.atualizarUsuario(usuarioRequest);
     }
 
     @Override
-    public void deletarUsuario(final String login) {
-
+    public void deletarUsuario(final String login) throws Exception {
+        if (isNull(login)) {
+            return;
+        }
+        usuarioUseCase.deletarUsuario(login);
     }
 }

@@ -8,4 +8,5 @@ public interface UsuarioUseCaseConverter {
 
     Usuario toUsuario(UsuarioRequestDTO usuarioRequestDTO);
     UsuarioResponseDTO toUsuarioResponseDTO(Usuario usuario);
+    void updateUsuarioFromRequest(Usuario usuario, UsuarioRequestDTO requestDTO);
 }

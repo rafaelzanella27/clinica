@@ -40,4 +40,16 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
                 .perfil(usuario.getPerfil())
                 .build();
     }
+
+    @Override
+    public void updateUsuarioFromRequest(Usuario usuario, UsuarioRequestDTO requestDTO) {
+        if (isNull(usuario) || isNull(requestDTO)) {
+            return;
+        }
+        usuario.setLogin(requestDTO.getLogin());
+        usuario.setSenha(requestDTO.getSenha());
+        usuario.setNome(requestDTO.getNome());
+        usuario.setEmail(requestDTO.getEmail());
+        usuario.setPerfil(PerfilUsuarioEnum.fromValue(requestDTO.getPerfil()));
+    }
 }

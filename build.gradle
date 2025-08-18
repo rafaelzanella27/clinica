@@ -38,6 +38,10 @@ dependencies {
 
     //Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+
+    //Lombok
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
