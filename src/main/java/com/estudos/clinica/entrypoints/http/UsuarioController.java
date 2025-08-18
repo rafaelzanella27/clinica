@@ -21,7 +21,7 @@ public interface UsuarioController {
     @Operation(summary = "Buscar usuário por login")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "login/{login}", produces = MediaType.APPLICATION_JSON_VALUE)
-    UsuarioResponseDTO buscarUsuarioPorId(@PathVariable String login);
+    UsuarioResponseDTO buscarUsuarioPorLogin(@PathVariable String login);
 
     @Operation(summary = "Atualizar um usuário existente")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -34,6 +34,7 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
             return null;
         }
         return UsuarioResponseDTO.builder()
+                .id(usuario.getId())
                 .login(usuario.getLogin())
                 .nome(usuario.getNome())
                 .email(usuario.getEmail())

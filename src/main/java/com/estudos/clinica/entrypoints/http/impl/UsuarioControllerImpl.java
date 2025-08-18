@@ -26,7 +26,7 @@ public class UsuarioControllerImpl implements UsuarioController {
     }
 
     @Override
-    public UsuarioResponseDTO buscarUsuarioPorId(final String login) {
+    public UsuarioResponseDTO buscarUsuarioPorLogin(final String login) {
         if (isNull(login)) {
             return null;
         }
