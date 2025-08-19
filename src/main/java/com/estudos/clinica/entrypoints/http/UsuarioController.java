@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(value = "/usuario")
 @Tag(name = "Usuários", description = "Gerenciamento de usuários")
 public interface UsuarioController {
@@ -17,6 +19,11 @@ public interface UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/criar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     UsuarioResponseDTO criarUsuario(@RequestBody UsuarioRequestDTO usuarioRequest) throws Exception;
+
+    @Operation(summary = "Buscar Todos usuários")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    List<UsuarioResponseDTO> buscarTodosUsuarios();
 
     @Operation(summary = "Buscar usuário por login")
     @ResponseStatus(HttpStatus.OK)

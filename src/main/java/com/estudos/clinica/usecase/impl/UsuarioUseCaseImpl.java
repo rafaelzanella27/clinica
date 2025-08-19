@@ -1,5 +1,6 @@
 package com.estudos.clinica.usecase.impl;
 
+import com.estudos.clinica.domain.model.Usuario;
 import com.estudos.clinica.domain.repository.UsuarioRepository;
 import com.estudos.clinica.entrypoints.http.data.request.UsuarioRequestDTO;
 import com.estudos.clinica.entrypoints.http.data.response.UsuarioResponseDTO;
@@ -8,6 +9,8 @@ import com.estudos.clinica.usecase.UsuarioUseCase;
 import com.estudos.clinica.usecase.converter.UsuarioUseCaseConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 import static java.util.Objects.isNull;
 
@@ -26,6 +29,14 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
 
         return usuarioUseCaseConverter.toUsuarioResponseDTO(
                 usuarioRepository.save(usuarioUseCaseConverter.toUsuario(requestDTO)));
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> buscarTodosUsuarios() {
+        List<Usuario> usuariosList = usuarioRepository.findAll();
+
+        return usuarioUseCaseConverter.toListUsuarioResponseDTO(usuariosList);
+
     }
 
     private boolean validarCep(final String cep) throws Exception {

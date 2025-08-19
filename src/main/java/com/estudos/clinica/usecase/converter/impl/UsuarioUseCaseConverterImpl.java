@@ -8,6 +8,8 @@ import com.estudos.clinica.gateway.cep.data.output.CepIntegrationOutput;
 import com.estudos.clinica.usecase.converter.UsuarioUseCaseConverter;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static java.util.Objects.isNull;
 
 @Component
@@ -27,6 +29,16 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
                 .cep(request.getCep())
                 .perfil(PerfilUsuarioEnum.fromValue(request.getPerfil()))
                 .build();
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> toListUsuarioResponseDTO(final List<Usuario> usuarios) {
+        if (!isNull(usuarios)) {
+            return usuarios.stream()
+                    .map(this::toUsuarioResponseDTO)
+                    .toList();
+        }
+        return List.of();
     }
 
     @Override

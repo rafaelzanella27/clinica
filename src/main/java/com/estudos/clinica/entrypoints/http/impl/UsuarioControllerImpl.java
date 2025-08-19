@@ -7,6 +7,8 @@ import com.estudos.clinica.usecase.UsuarioUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static java.util.Objects.isNull;
 
 @RestController
@@ -23,6 +25,12 @@ public class UsuarioControllerImpl implements UsuarioController {
 
         }
         return usuarioUseCase.criarUsuario(usuarioRequest);
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> buscarTodosUsuarios() {
+
+        return usuarioUseCase.buscarTodosUsuarios();
     }
 
     @Override
