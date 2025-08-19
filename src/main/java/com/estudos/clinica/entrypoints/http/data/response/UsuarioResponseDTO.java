@@ -16,5 +16,6 @@ public class UsuarioResponseDTO {
     private String login;
     private String nome;
     private String email;
+    private String cep;
     private PerfilUsuarioEnum perfil;
 }

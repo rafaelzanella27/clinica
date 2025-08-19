@@ -16,7 +16,7 @@ public interface UsuarioController {
     @Operation(summary = "Criar um novo usuário")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/criar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UsuarioResponseDTO criarUsuario(@RequestBody UsuarioRequestDTO usuarioRequest);
+    UsuarioResponseDTO criarUsuario(@RequestBody UsuarioRequestDTO usuarioRequest) throws Exception;
 
     @Operation(summary = "Buscar usuário por login")
     @ResponseStatus(HttpStatus.OK)

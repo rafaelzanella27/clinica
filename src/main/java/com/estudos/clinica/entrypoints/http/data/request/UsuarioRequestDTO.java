@@ -15,6 +15,7 @@ public class UsuarioRequestDTO {
     private String senha;
     private String nome;
     private String email;
+    private String cep;
     private String perfil;
 
 }

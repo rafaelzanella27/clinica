@@ -16,7 +16,7 @@ public class UsuarioControllerImpl implements UsuarioController {
     private final UsuarioUseCase usuarioUseCase;
 
     @Override
-    public UsuarioResponseDTO criarUsuario(final UsuarioRequestDTO usuarioRequest) {
+    public UsuarioResponseDTO criarUsuario(final UsuarioRequestDTO usuarioRequest) throws Exception {
 
         if (isNull(usuarioRequest)) {
             return null;

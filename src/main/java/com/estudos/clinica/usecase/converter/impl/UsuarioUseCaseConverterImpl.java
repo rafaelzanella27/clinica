@@ -4,6 +4,7 @@ import com.estudos.clinica.domain.model.PerfilUsuarioEnum;
 import com.estudos.clinica.domain.model.Usuario;
 import com.estudos.clinica.entrypoints.http.data.request.UsuarioRequestDTO;
 import com.estudos.clinica.entrypoints.http.data.response.UsuarioResponseDTO;
+import com.estudos.clinica.gateway.cep.data.output.CepIntegrationOutput;
 import com.estudos.clinica.usecase.converter.UsuarioUseCaseConverter;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
                 .senha(request.getSenha())
                 .nome(request.getNome())
                 .email(request.getEmail())
+                .cep(request.getCep())
                 .perfil(PerfilUsuarioEnum.fromValue(request.getPerfil()))
                 .build();
     }
@@ -39,6 +41,7 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
                 .nome(usuario.getNome())
                 .email(usuario.getEmail())
                 .perfil(usuario.getPerfil())
+                .cep(usuario.getCep())
                 .build();
     }
 
@@ -53,4 +56,14 @@ public class UsuarioUseCaseConverterImpl implements UsuarioUseCaseConverter {
         usuario.setEmail(requestDTO.getEmail());
         usuario.setPerfil(PerfilUsuarioEnum.fromValue(requestDTO.getPerfil()));
     }
+
+    @Override
+    public String toCep(final CepIntegrationOutput cepIntegrationOutput) {
+        if (isNull(cepIntegrationOutput)) {
+            return null;
+        }
+        return cepIntegrationOutput.getCep();
+    }
+
+
 }

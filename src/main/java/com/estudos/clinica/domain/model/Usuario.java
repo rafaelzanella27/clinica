@@ -23,6 +23,7 @@ public class Usuario {
     private String senha;
     private String nome;
     private String email;
+    private String cep;
 
     @Enumerated(EnumType.STRING)
     private PerfilUsuarioEnum perfil;
