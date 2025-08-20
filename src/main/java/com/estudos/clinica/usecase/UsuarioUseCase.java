@@ -14,5 +14,5 @@ public interface UsuarioUseCase {
 
     UsuarioResponseDTO atualizarUsuario(UsuarioRequestDTO requestDTO) throws Exception;
 
-    void deletarUsuario(String login) throws Exception;
+    void deletarUsuarioPorId(Long id) throws Exception;
 }

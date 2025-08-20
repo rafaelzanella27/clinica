@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.isNull;
 
@@ -72,14 +73,15 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
     }
 
     @Override
-    public void deletarUsuario(final String login) throws Exception {
-        if (isNull(login)) {
+    public void deletarUsuarioPorId(final Long id) throws Exception {
+        if (isNull(id)) {
             return;
         }
-        var usuario = usuarioRepository.findByLogin(login);
-        if (isNull(usuario)) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario.isEmpty()) {
             throw new Exception("Usuário não encontrado");
         }
-        usuarioRepository.delete(usuario);
+
+        usuarioRepository.delete(usuario.get());
     }
 }

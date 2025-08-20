@@ -50,10 +50,10 @@ public class UsuarioControllerImpl implements UsuarioController {
     }
 
     @Override
-    public void deletarUsuario(final String login) throws Exception {
-        if (isNull(login)) {
+    public void deletarUsuarioPorId(final Long id) throws Exception {
+        if (isNull(id)) {
             return;
         }
-        usuarioUseCase.deletarUsuario(login);
+        usuarioUseCase.deletarUsuarioPorId(id);
     }
 }

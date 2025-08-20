@@ -35,8 +35,8 @@ public interface UsuarioController {
     @PutMapping(value = "/atualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     void atualizarUsuario(@RequestBody UsuarioRequestDTO usuarioRequest) throws Exception;
 
-    @Operation(summary = "Deletar um usuário por login")
+    @Operation(summary = "Deletar um usuário por id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = "/deletar/login/{login}", produces = MediaType.APPLICATION_JSON_VALUE)
-    void deletarUsuario(@PathVariable String login) throws Exception;
+    @DeleteMapping(value = "/deletar/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    void deletarUsuarioPorId(@PathVariable Long id) throws Exception;
 }
