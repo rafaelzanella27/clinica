@@ -4,6 +4,7 @@ import com.estudos.clinica.domain.model.Usuario;
 import com.estudos.clinica.domain.repository.UsuarioRepository;
 import com.estudos.clinica.entrypoints.http.data.request.UsuarioRequestDTO;
 import com.estudos.clinica.entrypoints.http.data.response.UsuarioResponseDTO;
+import com.estudos.clinica.exceptions.RecursoNaoEncontradoException;
 import com.estudos.clinica.gateway.cep.BuscaCepGateway;
 import com.estudos.clinica.usecase.UsuarioUseCase;
 import com.estudos.clinica.usecase.converter.UsuarioUseCaseConverter;
@@ -54,7 +55,12 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
     @Override
     public UsuarioResponseDTO buscarUsuarioPorLogin(final String login) {
 
-        return usuarioUseCaseConverter.toUsuarioResponseDTO(usuarioRepository.findByLogin(login)); // Retornar a resposta apropriada
+        var usuario = usuarioRepository.findByLogin(login);
+        if (isNull(usuario)) {
+            throw new RecursoNaoEncontradoException("Usuário com login " +login +" não encontrado");
+        }
+
+        return usuarioUseCaseConverter.toUsuarioResponseDTO(usuario);
     }
 
     @Override
@@ -64,7 +70,7 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
         }
         var usuario = usuarioRepository.findByLogin(requestDTO.getLogin());
         if (isNull(usuario)) {
-            throw new Exception("Usuário não encontrado");
+            throw new RecursoNaoEncontradoException("Usuário com login " +requestDTO.getLogin() +" não encontrado");
         }
         usuarioUseCaseConverter.updateUsuarioFromRequest(usuario, requestDTO);
         usuarioRepository.save(usuario);
@@ -73,13 +79,13 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
     }
 
     @Override
-    public void deletarUsuarioPorId(final Long id) throws Exception {
+    public void deletarUsuarioPorId(final Long id) {
         if (isNull(id)) {
             return;
         }
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isEmpty()) {
-            throw new Exception("Usuário não encontrado");
+            throw new RecursoNaoEncontradoException("Usuário com ID " +id +" não encontrado");
         }
 
         usuarioRepository.delete(usuario.get());
